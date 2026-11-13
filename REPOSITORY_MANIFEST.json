@@ -1,0 +1,1946 @@
+{
+  "generated_at": "2026-11-11T16:15:07+00:00",
+  "schema_version": 1,
+  "note": "capability scores and roles are analyst judgements from README/static inspection; only fields under 'verified' are measured.",
+  "repositories": [
+    {
+      "id": "qlib",
+      "group": "core",
+      "requested_url": "https://github.com/microsoft/qlib",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/microsoft/qlib",
+        "branch": "main",
+        "head_sha": "54355232463878d2eebb91fe0ee5fa7fa1f5976c",
+        "size_mb": 14.6,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "MIT",
+        "file": "LICENSE",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-10-08T18:15:27+08:00",
+        "age_days": 34,
+        "status": "active"
+      },
+      "languages": [
+        "Python",
+        "Cython"
+      ],
+      "file_counts": {
+        "Python": 349,
+        "Jupyter": 4,
+        "Cython": 2,
+        "JavaScript": 1
+      },
+      "python": {
+        "requires": ">=3.8.0",
+        "dependencies_sample": [
+          "pyyaml",
+          "numpy",
+          "pandas>=1.1",
+          "mlflow<3.13",
+          "filelock>=3.16.0,<3.30",
+          "redis",
+          "dill",
+          "fire",
+          "ruamel.yaml>=0.17.38",
+          "python-redis-lock",
+          "tqdm",
+          "pymongo",
+          "loguru",
+          "lightgbm",
+          "gym"
+        ]
+      },
+      "summary": "New source builds introduce a **backward-incompatible safety default**: recorder loads are restricted. If you reload saved models/datasets, resume online or delayed",
+      "import_example": "import qlib; qlib.init(provider_uri=...); from qlib.contrib.model.gbdt import LGBModel",
+      "capabilities": {
+        "historical_data_normalization": 2,
+        "time_series_analytics": 1,
+        "factor_research": 3,
+        "alpha_discovery": 3,
+        "machine_learning": 3,
+        "strategy_generation": 1,
+        "backtesting": 2,
+        "research_automation": 2,
+        "performance_attribution": 1
+      },
+      "overlaps": [
+        "alphalens-reloaded (factor eval)",
+        "RD-Agent (built around qlib)"
+      ],
+      "limitations": [
+        "own binary data format; needs conversion",
+        "heavy ML dependency stack",
+        "CN-market-centric defaults",
+        "py3.8-3.12 classifiers; verify on newer"
+      ],
+      "static_risk_flags": [
+        "build/install script present: Dockerfile (not executed)",
+        "build/install script present: Makefile (not executed)",
+        "docker-oriented",
+        "setup.py flags: ['numpy.get_include']"
+      ],
+      "integration": {
+        "role": "ML alpha-research platform (data layer + model zoo + workflow)",
+        "suitable_for": [
+          "research",
+          "backtesting"
+        ],
+        "policy": "Isolate in envs/ml; use as optional research backend, never as core dependency",
+        "adapter_status": "operational",
+        "env": "envs/ml"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": {
+          "install_ok": true,
+          "import_ok": true,
+          "version": "0.9.7 (source build under sandbox-exec; needed --prerelease=allow for gym)",
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "vectorbt",
+      "group": "core",
+      "requested_url": "https://github.com/polakowo/vectorbt",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/polakowo/vectorbt",
+        "branch": "master",
+        "head_sha": "07f5e85e83a5286c396f4ecfd55dfaa05f25442d",
+        "size_mb": 248.8,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "file": "LICENSE.md",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-11-08T17:52:07+01:00",
+        "age_days": 3,
+        "status": "active"
+      },
+      "languages": [
+        "Python"
+      ],
+      "file_counts": {
+        "Python": 118,
+        "Jupyter": 21,
+        "Rust": 8,
+        "JavaScript": 1
+      },
+      "python": {
+        "requires": ">=3.11,<3.15",
+        "dependencies_sample": [
+          "numpy>=2.4.6",
+          "pandas>=3.0.3,<4.0",
+          "scipy",
+          "matplotlib",
+          "plotly>=4.12.0",
+          "nbformat>=4.2.0",
+          "ipywidgets>=7.0.0",
+          "anywidget",
+          "numba>=0.66",
+          "dill",
+          "tqdm",
+          "dateparser",
+          "imageio",
+          "scikit-learn",
+          "schedule"
+        ]
+      },
+      "summary": "VectorBT is a Python toolkit for trading research. Explore market data, build indicators and signals, and compare thousands of ideas across assets and timeframes. NumPy arrays, Numba acceleration, and an optional Rust engine let you run large experiments in a few lines of Python. Move from exploring price patterns to evaluating strategies in one workflow. Inspect trades, fees, drawdowns, and portf",
+      "import_example": "import vectorbt as vbt; pf = vbt.Portfolio.from_signals(close, entries, exits)",
+      "capabilities": {
+        "time_series_analytics": 2,
+        "strategy_generation": 2,
+        "strategy_optimization": 3,
+        "backtesting": 3,
+        "execution_simulation": 1,
+        "performance_attribution": 2,
+        "risk_management": 1
+      },
+      "overlaps": [
+        "bt",
+        "backtrader",
+        "zipline-reloaded",
+        "nautilus_trader"
+      ],
+      "limitations": [
+        "numba/llvmlite pins limit Python versions",
+        "no realistic order-book execution",
+        "open-source edition feature-gated vs PRO"
+      ],
+      "static_risk_flags": [
+        "build/install script present: Dockerfile (not executed)",
+        "docker-oriented"
+      ],
+      "integration": {
+        "role": "Fast vectorised backtesting + parameter sweeps (numba)",
+        "suitable_for": [
+          "research",
+          "backtesting"
+        ],
+        "policy": "Candidate parameter-sweep engine; isolate in envs/backtest",
+        "adapter_status": "untested",
+        "env": "envs/backtest"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": {
+          "install_ok": true,
+          "import_ok": true,
+          "version": "1.2.0",
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "quantstats",
+      "group": "core",
+      "requested_url": "https://github.com/ranaroussi/quantstats",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/ranaroussi/quantstats",
+        "branch": "main",
+        "head_sha": "d1a214fb906e76f974f45cdccf923b601c67a756",
+        "size_mb": 4.0,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "file": "LICENSE.txt",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-11-02T14:00:34Z",
+        "age_days": 9,
+        "status": "active"
+      },
+      "languages": [
+        "Python"
+      ],
+      "file_counts": {
+        "Python": 21
+      },
+      "python": {
+        "requires": ">=3.10",
+        "dependencies_sample": [
+          "pandas>=2.0.0",
+          "numpy>=1.24.0",
+          "scipy>=1.11.0",
+          "matplotlib>=3.7.0",
+          "seaborn>=0.13.0",
+          "tabulate>=0.9.0",
+          "yfinance>=0.2.40",
+          "python-dateutil>=2.8.0"
+        ]
+      },
+      "summary": "1. `quantstats.stats` - for calculating various performance metrics, like Sharpe ratio, Win rate, Volatility, etc. 2. `quantstats.plots` - for visualizing performance, drawdowns, rolling statistics, monthly returns, etc.",
+      "import_example": "import quantstats as qs; qs.reports.html(returns, benchmark='SPY')",
+      "capabilities": {
+        "time_series_analytics": 2,
+        "statistical_analysis": 2,
+        "risk_management": 2,
+        "performance_attribution": 2
+      },
+      "overlaps": [
+        "QuantInvestStrats",
+        "vectorbt stats"
+      ],
+      "limitations": [
+        "reports fetch benchmark via Yahoo (network)",
+        "metric conventions differ slightly from engine; cross-checked"
+      ],
+      "static_risk_flags": [],
+      "integration": {
+        "role": "Portfolio performance analytics and HTML tearsheets",
+        "suitable_for": [
+          "research"
+        ],
+        "policy": "OPERATIONAL adapter (tested): metrics cross-check/tearsheets",
+        "adapter_status": "operational",
+        "env": "core"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": {
+          "install_ok": true,
+          "import_ok": true,
+          "version": "0.0.86",
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "Lean",
+      "group": "core",
+      "requested_url": "https://github.com/QuantConnect/Lean",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/QuantConnect/Lean",
+        "branch": "master",
+        "head_sha": "054ec0596a66f0ad09ca5101df424cf6697060a7",
+        "size_mb": 514.2,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "file": "LICENSE",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-11-10T23:39:09Z",
+        "age_days": 1,
+        "status": "active"
+      },
+      "languages": [
+        "C#",
+        "Python"
+      ],
+      "file_counts": {
+        "C#": 4564,
+        "Python": 540,
+        "Jupyter": 8
+      },
+      "python": {
+        "requires": null,
+        "dependencies_sample": []
+      },
+      "summary": "&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; LEAN is an event-driven, professional-caliber algorithmic trading  platform built with a passion for elegant engineering and deep quant  concept modeling. Out-of-the-box alternative data and live-trading support.",
+      "import_example": "(not importable) run via LEAN CLI / dotnet: lean backtest <project>",
+      "capabilities": {
+        "market_data_acquisition": 2,
+        "historical_data_normalization": 2,
+        "futures_research": 3,
+        "options_analytics": 2,
+        "derivatives_pricing": 2,
+        "backtesting": 3,
+        "execution_simulation": 3,
+        "strategy_generation": 1,
+        "performance_attribution": 2
+      },
+      "overlaps": [
+        "nautilus_trader",
+        "zipline-reloaded"
+      ],
+      "limitations": [
+        "needs .NET SDK and/or Docker",
+        "data is mostly paid/QuantConnect-hosted",
+        "brokerage modules present - real-money paths exist (disabled by policy)",
+        "not a Python library"
+      ],
+      "static_risk_flags": [
+        "build/install script present: Dockerfile (not executed)",
+        "docker-oriented",
+        "live trading features"
+      ],
+      "integration": {
+        "role": "Full institutional algo-trading engine (C#/.NET, Python algos)",
+        "suitable_for": [
+          "backtesting",
+          "execution"
+        ],
+        "policy": "UNSUPPORTED in Python layer; reference architecture only",
+        "adapter_status": "unsupported",
+        "env": "n/a"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": null
+      }
+    },
+    {
+      "id": "machine-learning-for-trading",
+      "group": "core",
+      "requested_url": "https://github.com/stefan-jansen/machine-learning-for-trading",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/stefan-jansen/machine-learning-for-trading",
+        "branch": "main",
+        "head_sha": "91c903e71c1d0f1b9015f18551fadbb60bcad132",
+        "size_mb": 297.6,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "MIT",
+        "file": "LICENSE",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-11-06T15:06:05Z",
+        "age_days": 5,
+        "status": "active"
+      },
+      "languages": [
+        "Jupyter",
+        "Python"
+      ],
+      "file_counts": {
+        "Python": 1218,
+        "Jupyter": 483
+      },
+      "python": {
+        "requires": ">=3.14,<3.15",
+        "dependencies_sample": [
+          "numpy>=1.26",
+          "scipy>=1.12,<1.18",
+          "pandas>=2.2",
+          "polars>=1.0",
+          "pyarrow>=15.0",
+          "plotly>=5.20",
+          "matplotlib>=3.8",
+          "seaborn>=0.13",
+          "kaleido>=1.3",
+          "scikit-learn>=1.4",
+          "threadpoolctl>=3.1",
+          "xgboost>=3.1",
+          "lightgbm>=4.6",
+          "catboost>=1.2.8",
+          "optuna>=3.6"
+        ]
+      },
+      "summary": "The code for [*Machine Learning for Trading, 3rd Edition*](https://amzn.to/4eigy2F) by from the ground up around one end-to-end workflow. How a research idea becomes a strategy you can",
+      "import_example": "(notebooks; no package)",
+      "capabilities": {
+        "market_data_acquisition": 1,
+        "time_series_analytics": 2,
+        "statistical_analysis": 2,
+        "factor_research": 2,
+        "alpha_discovery": 1,
+        "machine_learning": 3,
+        "reinforcement_learning": 1,
+        "backtesting": 1,
+        "research_automation": 0
+      },
+      "overlaps": [
+        "qlib",
+        "FinRL"
+      ],
+      "limitations": [
+        "notebooks, not a library",
+        "env pinned to very recent Python (>=3.14 in pyproject) with heavy deps",
+        "data downloads from third parties"
+      ],
+      "static_risk_flags": [
+        "docker-oriented",
+        "has broker/live-trading connectors",
+        "live trading features",
+        "needs API keys",
+        "pipe-to-shell in README.md"
+      ],
+      "integration": {
+        "role": "Book companion: notebooks for ML-for-trading workflows",
+        "suitable_for": [
+          "learning"
+        ],
+        "policy": "Learning/reference only; do not import",
+        "adapter_status": "reference_only",
+        "env": "n/a"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": null
+      }
+    },
+    {
+      "id": "PyPortfolioOpt",
+      "group": "portfolio",
+      "requested_url": "https://github.com/PyPortfolio/PyPortfolioOpt",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/PyPortfolio/PyPortfolioOpt",
+        "branch": "main",
+        "head_sha": "a6638d2e06dae6f444fd022cfd4b3c528902a85b",
+        "size_mb": 20.2,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "MIT",
+        "file": "LICENSE",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-07-07T17:13:11-04:00",
+        "age_days": 127,
+        "status": "slow"
+      },
+      "languages": [
+        "Python"
+      ],
+      "file_counts": {
+        "Python": 40,
+        "Jupyter": 5
+      },
+      "python": {
+        "requires": ">=3.10,<3.15",
+        "dependencies_sample": [
+          "cvxpy>=1.1.19",
+          "numpy>=1.26.0,<3.0.0",
+          "pandas>=1.0.0,<4.0.0",
+          "scikit-base<0.14.0",
+          "scikit-learn>=0.24.1",
+          "scipy>=1.3.0"
+        ]
+      },
+      "summary": "PyPortfolioOpt is a library implementing portfolio optimization methods, including classical mean-variance optimization, Black-Litterman allocation, or shrinkage and Hierarchical Risk Parity.",
+      "import_example": "from pypfopt import EfficientFrontier, risk_models, expected_returns",
+      "capabilities": {
+        "statistical_analysis": 1,
+        "strategy_optimization": 1,
+        "portfolio_construction": 3,
+        "risk_management": 1
+      },
+      "overlaps": [
+        "skfolio",
+        "Riskfolio-Lib",
+        "bt"
+      ],
+      "limitations": [
+        "no backtesting/CV framework",
+        "mean-variance estimation-error sensitivity"
+      ],
+      "static_risk_flags": [
+        "build/install script present: Makefile (not executed)"
+      ],
+      "integration": {
+        "role": "Classical portfolio optimisation (mean-variance, HRP, Black-Litterman)",
+        "suitable_for": [
+          "research"
+        ],
+        "policy": "OPERATIONAL adapter (tested); smallest reliable optimiser",
+        "adapter_status": "operational",
+        "env": "core"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": {
+          "install_ok": true,
+          "import_ok": false,
+          "version": null,
+          "error": "-autonomous-lab/envs/probe/PyPortfolioOpt/lib/python3.12/site-packages/skbase/utils/dependencies/_dependencies.py\", line 9, in <module>\n    from packaging.markers import InvalidMarker, Marker\nModuleNotFoundError: No module named 'packaging'"
+        }
+      }
+    },
+    {
+      "id": "Riskfolio-Lib",
+      "group": "portfolio",
+      "requested_url": "https://github.com/dcajasn/Riskfolio-Lib",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/dcajasn/Riskfolio-Lib",
+        "branch": "master",
+        "head_sha": "344b899eb72e5636330647f08e3c5d88a8f71a84",
+        "size_mb": 147.5,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "BSD-3-Clause",
+        "file": "LICENSE.txt",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-11-04T00:11:11-03:00",
+        "age_days": 7,
+        "status": "active"
+      },
+      "languages": [
+        "Python"
+      ],
+      "file_counts": {
+        "C++": 797,
+        "C/C++": 528,
+        "Jupyter": 57,
+        "Python": 23,
+        "C": 21,
+        "JavaScript": 3
+      },
+      "python": {
+        "requires": null,
+        "dependencies_sample": [
+          "numpy>=1.26.4",
+          "scipy>=1.13.1",
+          "pandas>=2.2.2",
+          "matplotlib>=3.9.2",
+          "clarabel>=0.11.1",
+          "SCS>=3.2.7",
+          "cvxpy>=1.7.2",
+          "scikit-learn>=1.7.0",
+          "statsmodels>=0.14.5",
+          "arch>=7.2",
+          "xlsxwriter>=3.2.2",
+          "networkx>=3.4.2",
+          "astropy>=6.1.3",
+          "pybind11>=3.1.0",
+          "vectorbt>=0.28.0"
+        ]
+      },
+      "summary": "Riskfolio-Lib is a library for making __Portfolio Optimization in Python__ made in Peru &#x1F1F5;&#x1F1EA;. Its objective is to help students, academics and practitioners to build investment portfolios based on mathematically complex models with low effort. It is built on top of with [Pandas](https://pandas.pydata.org/) data structures.",
+      "import_example": "import riskfolio as rp; port = rp.Portfolio(returns=Y)",
+      "capabilities": {
+        "portfolio_construction": 3,
+        "risk_management": 3,
+        "performance_attribution": 1,
+        "statistical_analysis": 1
+      },
+      "overlaps": [
+        "skfolio",
+        "PyPortfolioOpt"
+      ],
+      "limitations": [
+        "cvxpy solver stack",
+        "API is large; docs-driven"
+      ],
+      "static_risk_flags": [
+        "setup.py flags: ['cmdclass']"
+      ],
+      "integration": {
+        "role": "Advanced convex portfolio/risk optimisation (many risk measures)",
+        "suitable_for": [
+          "research"
+        ],
+        "policy": "Alternative optimiser in envs/portfolio",
+        "adapter_status": "untested",
+        "env": "envs/portfolio"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": {
+          "install_ok": true,
+          "import_ok": true,
+          "version": "7.4.1",
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "skfolio",
+      "group": "portfolio",
+      "requested_url": "https://github.com/skfolio/skfolio",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/skfolio/skfolio",
+        "branch": "main",
+        "head_sha": "7721090537634a549008a546c8968cdec0eaf69a",
+        "size_mb": 15.1,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "BSD-3-Clause",
+        "file": "LICENSE",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-11-10T21:34:32Z",
+        "age_days": 1,
+        "status": "active"
+      },
+      "languages": [
+        "Python"
+      ],
+      "file_counts": {
+        "Python": 566,
+        "JavaScript": 1
+      },
+      "python": {
+        "requires": ">=3.10",
+        "dependencies_sample": [
+          "numpy>=1.24.0",
+          "scipy>=1.15.2",
+          "pandas>=2.1.0",
+          "cvxpy-base>=1.5.0",
+          "clarabel>=0.10.0",
+          "scikit-learn>=1.6.0",
+          "plotly>=6.0.0"
+        ]
+      },
+      "summary": ".. The regions delimited by the `skfolio-shared-*-start` and `skfolio-shared-*-end` comments are included verbatim in `docs/index.rst`. Do not rename or remove them.",
+      "import_example": "from skfolio.optimization import MeanRisk; MeanRisk().fit(X)",
+      "capabilities": {
+        "statistical_analysis": 1,
+        "machine_learning": 2,
+        "strategy_optimization": 2,
+        "portfolio_construction": 3,
+        "risk_management": 3,
+        "performance_attribution": 1
+      },
+      "overlaps": [
+        "PyPortfolioOpt",
+        "Riskfolio-Lib"
+      ],
+      "limitations": [
+        "sklearn/cvxpy coupling"
+      ],
+      "static_risk_flags": [],
+      "integration": {
+        "role": "Portfolio optimisation with sklearn API, CV, stress/factor models",
+        "suitable_for": [
+          "research"
+        ],
+        "policy": "Preferred next-gen optimiser candidate (walk-forward CV built in)",
+        "adapter_status": "untested",
+        "env": "envs/portfolio"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": {
+          "install_ok": true,
+          "import_ok": true,
+          "version": "1.12.9",
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "QuantInvestStrats",
+      "group": "portfolio",
+      "requested_url": "https://github.com/ArturSepp/QuantInvestStrats",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/ArturSepp/QuantInvestStrats",
+        "branch": "main",
+        "head_sha": "55609b50ee672f3fadc783fec3ef4b803f2d8018",
+        "size_mb": 66.2,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "MIT",
+        "file": "LICENSE.txt",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-11-10T13:54:13+01:00",
+        "age_days": 1,
+        "status": "active"
+      },
+      "languages": [
+        "Python"
+      ],
+      "file_counts": {
+        "Python": 743,
+        "Jupyter": 1
+      },
+      "python": {
+        "requires": ">=3.11",
+        "dependencies_sample": [
+          "numba>=0.64.0",
+          "numpy>=2.0",
+          "scipy>=1.12.0",
+          "statsmodels>=0.14.2",
+          "pandas>=2.2.0",
+          "matplotlib>=3.8.0",
+          "seaborn>=0.13.0",
+          "openpyxl>=3.1.0",
+          "PyYAML>=6.0"
+        ]
+      },
+      "summary": "Implemented in [qis \u2014 Quantitative Investment Strategies](https://github.com/ArturSepp/QuantInvestStrats). Software citation: [CITATION.cff](https://github.com/ArturSepp/QuantInvestStrats/blob/main/CITATION.cff).",
+      "import_example": "import qis",
+      "capabilities": {
+        "time_series_analytics": 2,
+        "performance_attribution": 2,
+        "risk_management": 1,
+        "portfolio_construction": 1,
+        "backtesting": 1
+      },
+      "overlaps": [
+        "quantstats",
+        "bt"
+      ],
+      "limitations": [
+        "smaller community",
+        "opinionated plotting API"
+      ],
+      "static_risk_flags": [
+        "setup.py flags: ['cmdclass']"
+      ],
+      "integration": {
+        "role": "Strategy/portfolio analytics, factor and performance reports (qis)",
+        "suitable_for": [
+          "research"
+        ],
+        "policy": "Optional reporting backend",
+        "adapter_status": "untested",
+        "env": "envs/portfolio"
+      },
+      "verified": {
+        "api_source_path_exists": false,
+        "pypi_install_import_py312": {
+          "install_ok": true,
+          "import_ok": true,
+          "version": "?",
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "alphalens-reloaded",
+      "group": "portfolio",
+      "requested_url": "https://github.com/stefan-jansen/alphalens-reloaded",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/stefan-jansen/alphalens-reloaded",
+        "branch": "main",
+        "head_sha": "60755d1cc7d9d36a4c70c8344cbdb168fe99df24",
+        "size_mb": 0.8,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "file": "LICENSE",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-10-25T20:28:16-04:00",
+        "age_days": 17,
+        "status": "active"
+      },
+      "languages": [
+        "Python"
+      ],
+      "file_counts": {
+        "Python": 21,
+        "Jupyter": 8
+      },
+      "python": {
+        "requires": ">=3.11,<3.16",
+        "dependencies_sample": [
+          "numpy>=1.23.5; python_version<'3.12'",
+          "numpy>=1.26.0; python_version>='3.12'",
+          "pandas >=1.5.0,<4.0; python_version < '3.15'",
+          "pandas >=3.0,<4.0; python_version >= '3.15'",
+          "pytz",
+          "tzdata",
+          "matplotlib >=1.4.0",
+          "scipy >=0.14.0",
+          "seaborn >=0.6.0",
+          "statsmodels >=0.6.1",
+          "IPython >=3.2.3",
+          "empyrical-reloaded>=0.5.7"
+        ]
+      },
+      "summary": "Alphalens is a Python library for performance analysis of predictive (alpha) stock factors. Alphalens works great with the",
+      "import_example": "import alphalens; alphalens.utils.get_clean_factor_and_forward_returns(factor, prices)",
+      "capabilities": {
+        "statistical_analysis": 2,
+        "factor_research": 3,
+        "alpha_discovery": 2,
+        "performance_attribution": 2
+      },
+      "overlaps": [
+        "qlib analysis"
+      ],
+      "limitations": [
+        "IC-centric: judge by tradeable spread, not IC (project rule)",
+        "pandas-version sensitive"
+      ],
+      "static_risk_flags": [],
+      "integration": {
+        "role": "Factor/alpha signal evaluation (IC, quantile returns, turnover)",
+        "suitable_for": [
+          "research"
+        ],
+        "policy": "Factor evaluation tool in envs/factor",
+        "adapter_status": "untested",
+        "env": "envs/factor"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": {
+          "install_ok": true,
+          "import_ok": true,
+          "version": "0.5.1",
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "arbitragelab",
+      "group": "portfolio",
+      "requested_url": "https://github.com/hudson-and-thames/arbitragelab",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/hudson-and-thames/arbitragelab",
+        "branch": "master",
+        "head_sha": "32ccd567e8541965a35293a67944945f6d377f65",
+        "size_mb": 77.8,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "BSD-3-Clause",
+        "file": "LICENSE.txt",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2024-05-12T16:28:47+04:00",
+        "age_days": 913,
+        "status": "stale"
+      },
+      "languages": [
+        "Python"
+      ],
+      "file_counts": {
+        "Python": 145
+      },
+      "python": {
+        "requires": "^3.8",
+        "dependencies_sample": [
+          "python",
+          "POT",
+          "arch",
+          "werkzeug",
+          "yahoo-fin",
+          "yfinance",
+          "cython",
+          "dash",
+          "mpmath",
+          "pandas",
+          "pmdarima",
+          "pyvinecopulib",
+          "requests_html",
+          "pyzmq",
+          "seaborn"
+        ]
+      },
+      "summary": "ArbitrageLab is a python library that includes both end-to-end strategies and strategy creation tools that cover the whole range of strategies defined by [Krauss' taxonomy](https://www.econstor.eu/bitstream/10419/116783/1/833997289.pdf) for pairs trading strategies.",
+      "import_example": "from arbitragelab.cointegration_approach import JohansenPortfolio",
+      "capabilities": {
+        "statistical_analysis": 3,
+        "alpha_discovery": 2,
+        "strategy_generation": 2,
+        "time_series_analytics": 2,
+        "portfolio_construction": 1
+      },
+      "overlaps": [
+        "vectorbt (signals)"
+      ],
+      "limitations": [
+        "last commit 2024-05 (stale)",
+        "pinned old deps (python ^3.8) likely conflict",
+        "commercial docs/support at Hudson & Thames; some modules reference paid content"
+      ],
+      "static_risk_flags": [],
+      "integration": {
+        "role": "Statistical-arbitrage / pairs-trading research toolkit",
+        "suitable_for": [
+          "research"
+        ],
+        "policy": "Quarantine: install only in own env, expect failures",
+        "adapter_status": "untested",
+        "env": "envs/statarb"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": {
+          "install_ok": true,
+          "import_ok": true,
+          "version": "py3.12 FAILED (pins scikit-learn 1.3.0, no wheel); works on py3.11 only after manual pins setuptools==80.9.0 + typing_extensions==4.12.2",
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "nautilus_trader",
+      "group": "backtesting",
+      "requested_url": "https://github.com/nautechsystems/nautilus_trader",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/nautechsystems/nautilus_trader",
+        "branch": "develop",
+        "head_sha": "1e0dec15372097acf4d7c264c18f2e31e82388b0",
+        "size_mb": 183.8,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "LGPL-3.0",
+        "file": "LICENSE",
+        "commercial_use": "permitted if dynamically linked; modifications to the library must be shared"
+      },
+      "maintenance": {
+        "last_commit": "2026-11-11T22:08:47+10:00",
+        "age_days": 0,
+        "status": "active"
+      },
+      "languages": [
+        "Rust",
+        "Python",
+        "Cython"
+      ],
+      "file_counts": {
+        "Rust": 3116,
+        "Python": 446
+      },
+      "python": {
+        "requires": null,
+        "dependencies_sample": []
+      },
+      "summary": "NautilusTrader is an open-source, production-grade, Rust-native engine for multi-asset, The system spans research, deterministic simulation, and live execution within a single",
+      "import_example": "from nautilus_trader.backtest.node import BacktestNode",
+      "capabilities": {
+        "historical_data_normalization": 2,
+        "futures_research": 2,
+        "options_analytics": 1,
+        "backtesting": 3,
+        "execution_simulation": 3
+      },
+      "overlaps": [
+        "Lean",
+        "zipline-reloaded",
+        "vectorbt"
+      ],
+      "limitations": [
+        "LGPL-3.0 (dynamic linking OK; modifications must be shared)",
+        "steep learning curve",
+        "live-execution adapters exist - disabled by policy",
+        "builds from source need Rust toolchain"
+      ],
+      "static_risk_flags": [
+        "build/install script present: Makefile (not executed)",
+        "docker-oriented",
+        "has broker/live-trading connectors",
+        "live trading features"
+      ],
+      "integration": {
+        "role": "High-performance event-driven backtest + live engine (Rust core)",
+        "suitable_for": [
+          "backtesting",
+          "execution"
+        ],
+        "policy": "Isolated env; backtest-only; use PyPI wheel, never build clone",
+        "adapter_status": "untested",
+        "env": "envs/nautilus"
+      },
+      "verified": {
+        "api_source_path_exists": false,
+        "pypi_install_import_py312": {
+          "install_ok": true,
+          "import_ok": true,
+          "version": "1.231.0",
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "zipline-reloaded",
+      "group": "backtesting",
+      "requested_url": "https://github.com/stefan-jansen/zipline-reloaded",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/stefan-jansen/zipline-reloaded",
+        "branch": "main",
+        "head_sha": "5dd9fef5d42c2d084021b5ae10454de166cc5541",
+        "size_mb": 25.2,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "file": "LICENSE",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-11-02T10:12:01-05:00",
+        "age_days": 9,
+        "status": "active"
+      },
+      "languages": [
+        "Python",
+        "Cython"
+      ],
+      "file_counts": {
+        "Python": 281,
+        "Cython": 16,
+        "Jupyter": 2
+      },
+      "python": {
+        "requires": ">=3.11,<3.15",
+        "dependencies_sample": [
+          "numpy>=1.23.5; python_version<'3.12'",
+          "numpy>=1.26.0; python_version>='3.12'",
+          "numpy>=2.1; python_version>='3.13'",
+          "numpy>=2.3.3; python_version>='3.14'",
+          "pandas>=1.5.3,<3.0; python_version<'3.14'",
+          "pandas>=2.3.3,<3.0; python_version>='3.14'",
+          "alembic >=0.7.7",
+          "bcolz-zipline >=1.2.6",
+          "bottleneck >=1.0.0",
+          "click >=4.0.0",
+          "empyrical-reloaded >=0.5.7",
+          "h5py >=2.7.1",
+          "intervaltree >=2.1.0",
+          "iso3166 >=2.1.1",
+          "iso4217 >=1.6.20180829"
+        ]
+      },
+      "summary": "Zipline is a Pythonic event-driven system for backtesting, developed and used as the backtesting and live-trading engine by [crowd-sourced investment fund Quantopian](https://www.bizjournals.com/boston/news/2020/11/10/quantopian-shuts-down-cofounders-head-elsewhere.html). Since it closed late 2020, the domain that had hosted these docs expired. The library is used extensively in the book [Machine ",
+      "import_example": "from zipline import run_algorithm; from zipline.api import order_target_percent",
+      "capabilities": {
+        "historical_data_normalization": 2,
+        "factor_research": 2,
+        "backtesting": 3,
+        "execution_simulation": 2
+      },
+      "overlaps": [
+        "backtrader",
+        "vectorbt",
+        "bt"
+      ],
+      "limitations": [
+        "bundle-ingestion friction",
+        "daily/minute equities bias"
+      ],
+      "static_risk_flags": [
+        "needs API keys",
+        "setup.py flags: ['Cython', 'numpy.get_include']"
+      ],
+      "integration": {
+        "role": "Event-driven backtester (Quantopian lineage), pipeline API",
+        "suitable_for": [
+          "backtesting",
+          "research"
+        ],
+        "policy": "Candidate event-driven backtester",
+        "adapter_status": "untested",
+        "env": "envs/backtest"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": {
+          "install_ok": true,
+          "import_ok": true,
+          "version": "3.2.1",
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "backtrader",
+      "group": "backtesting",
+      "requested_url": "https://github.com/mementum/backtrader",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/mementum/backtrader",
+        "branch": "master",
+        "head_sha": "b853d7c90b6721476eb5a5ea3135224e33db1f14",
+        "size_mb": 9.8,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "GPL-3.0",
+        "file": "LICENSE",
+        "commercial_use": "RESTRICTED: copyleft obligations on distribution/derivatives; get legal review"
+      },
+      "maintenance": {
+        "last_commit": "2023-04-19T16:13:08+02:00",
+        "age_days": 1302,
+        "status": "stale"
+      },
+      "languages": [
+        "Python"
+      ],
+      "file_counts": {
+        "Python": 345,
+        "Jupyter": 2
+      },
+      "python": {
+        "requires": null,
+        "dependencies_sample": []
+      },
+      "summary": ".. image:: https://img.shields.io/pypi/v/backtrader.svg :target: https://pypi.python.org/pypi/backtrader/",
+      "import_example": "import backtrader as bt; cerebro = bt.Cerebro()",
+      "capabilities": {
+        "backtesting": 2,
+        "execution_simulation": 2,
+        "strategy_generation": 1
+      },
+      "overlaps": [
+        "zipline-reloaded",
+        "vectorbt",
+        "bt"
+      ],
+      "limitations": [
+        "GPL-3.0 (strong copyleft)",
+        "no commits since 2023-04",
+        "slow (pure Python)"
+      ],
+      "static_risk_flags": [
+        "setup.py flags: ['exec(']"
+      ],
+      "integration": {
+        "role": "Legacy event-driven backtester",
+        "suitable_for": [
+          "backtesting",
+          "learning"
+        ],
+        "policy": "Reference only; license + staleness rule out linking",
+        "adapter_status": "reference_only",
+        "env": "n/a"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": {
+          "install_ok": true,
+          "import_ok": true,
+          "version": "75: SyntaxWarning: invalid escape sequence '\\*'\n  - callback(msg, \\*args, \\*\\*kwargs)\n/Users/newman/quantalpha/quant-autonomous-lab/envs/probe/backtrader/lib/python3.12/site-packages/backtrader/cerebro.py:717: SyntaxWarning: invalid escape sequence '\\*'\n  - callback(data, status, \\*args, \\*\\*kwargs)",
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "bt",
+      "group": "backtesting",
+      "requested_url": "https://github.com/pmorissette/bt",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/pmorissette/bt",
+        "branch": "master",
+        "head_sha": "0c8f521fa19704392ee182bf838b42607e236c5e",
+        "size_mb": 20.6,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "MIT",
+        "file": "LICENSE",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-11-08T18:09:02-05:00",
+        "age_days": 3,
+        "status": "active"
+      },
+      "languages": [
+        "Python"
+      ],
+      "file_counts": {
+        "Jupyter": 19,
+        "Python": 13
+      },
+      "python": {
+        "requires": ">=3.9",
+        "dependencies_sample": [
+          "ffn>=1.1.2",
+          "pyprind>=2.11",
+          "tqdm>=4"
+        ]
+      },
+      "summary": "Build, test, and compare investment strategies from reusable Python components. bt combines strategy logic with historical price data, tracks portfolio positions",
+      "import_example": "import bt; bt.run(bt.Backtest(strategy, data))",
+      "capabilities": {
+        "strategy_generation": 1,
+        "portfolio_construction": 2,
+        "backtesting": 2,
+        "performance_attribution": 1
+      },
+      "overlaps": [
+        "vectorbt",
+        "PyPortfolioOpt"
+      ],
+      "limitations": [
+        "daily rebalancing paradigm; no intraday execution"
+      ],
+      "static_risk_flags": [
+        "build/install script present: Makefile (not executed)"
+      ],
+      "integration": {
+        "role": "Tree-based portfolio/allocation backtesting",
+        "suitable_for": [
+          "research",
+          "backtesting"
+        ],
+        "policy": "Candidate for allocation-style strategy tests",
+        "adapter_status": "untested",
+        "env": "envs/backtest"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": {
+          "install_ok": true,
+          "import_ok": true,
+          "version": "1.4.1",
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "QuantLib",
+      "group": "backtesting",
+      "requested_url": "https://github.com/lballabio/QuantLib",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/lballabio/QuantLib",
+        "branch": "master",
+        "head_sha": "cf74c9f657150750dfbf00ed6fd4c0768bc5ce36",
+        "size_mb": 52.6,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "BSD-style (QuantLib License)",
+        "file": "LICENSE.txt",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-11-10T17:59:13+01:00",
+        "age_days": 1,
+        "status": "active"
+      },
+      "languages": [
+        "C++",
+        "Python"
+      ],
+      "file_counts": {
+        "C++": 2676,
+        "Python": 6
+      },
+      "python": {
+        "requires": null,
+        "dependencies_sample": []
+      },
+      "summary": "The QuantLib project () is aimed at providing a comprehensive software framework for quantitative finance. QuantLib is",
+      "import_example": "import QuantLib as ql",
+      "capabilities": {
+        "derivatives_pricing": 3,
+        "options_analytics": 3,
+        "risk_management": 1,
+        "time_series_analytics": 1
+      },
+      "overlaps": [
+        "py_vollib"
+      ],
+      "limitations": [
+        "clone is C++ source - build NOT attempted; use PyPI wheel",
+        "steep API"
+      ],
+      "static_risk_flags": [],
+      "integration": {
+        "role": "Reference derivatives/fixed-income pricing library (C++ with Python SWIG)",
+        "suitable_for": [
+          "research"
+        ],
+        "policy": "Use PyPI wheel in envs/derivs",
+        "adapter_status": "untested",
+        "env": "envs/derivs"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": {
+          "install_ok": true,
+          "import_ok": true,
+          "version": "1.44",
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "py_vollib",
+      "group": "backtesting",
+      "requested_url": "https://github.com/vollib/py_vollib",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/vollib/py_vollib",
+        "branch": "master",
+        "head_sha": "11f2058f709328339e3906d99cb04ff41af97776",
+        "size_mb": 18.8,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "MIT",
+        "file": "LICENSE",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-04-30T17:11:13+09:00",
+        "age_days": 195,
+        "status": "slow"
+      },
+      "languages": [
+        "Python"
+      ],
+      "file_counts": {
+        "Python": 73,
+        "JavaScript": 11
+      },
+      "python": {
+        "requires": ">=3.9,<3.13",
+        "dependencies_sample": [
+          "python",
+          "cody-special",
+          "piecewise-rational",
+          "py_lets_be_rational",
+          "simplejson",
+          "numpy",
+          "pandas",
+          "scipy"
+        ]
+      },
+      "summary": "Building on this solid foundation, `vollib` provides functions to calculate option prices, implied volatility and greeks using Black, Black-Scholes, and Black-Scholes-Merton. `vollib` implements both analytical and numerical greeks for each of the three pricing formulae. Strike prices (`K`) must be strictly positive for the Black, Black-Scholes, and Black-Scholes-Merton pricing functions. A zero s",
+      "import_example": "from py_vollib.black_scholes import black_scholes",
+      "capabilities": {
+        "options_analytics": 3,
+        "derivatives_pricing": 1
+      },
+      "overlaps": [
+        "QuantLib"
+      ],
+      "limitations": [
+        "python_requires <3.13",
+        "European options only"
+      ],
+      "static_risk_flags": [],
+      "integration": {
+        "role": "Black/Black-Scholes(-Merton) pricing, Greeks, implied vol",
+        "suitable_for": [
+          "research"
+        ],
+        "policy": "Smallest reliable IV/Greeks library (own env)",
+        "adapter_status": "untested",
+        "env": "envs/derivs"
+      },
+      "verified": {
+        "api_source_path_exists": false,
+        "pypi_install_import_py312": {
+          "install_ok": true,
+          "import_ok": true,
+          "version": "?\n<string>:1: DeprecationWarning: py_vollib is deprecated and will be removed in a future release; please import from vollib instead.",
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "RD-Agent",
+      "group": "ai",
+      "requested_url": "https://github.com/microsoft/RD-Agent",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/microsoft/RD-Agent",
+        "branch": "main",
+        "head_sha": "484776c211e4fbbeef03e0ec00d6bbee7362a4f4",
+        "size_mb": 21.7,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "MIT",
+        "file": "LICENSE",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-09-23T19:05:10+08:00",
+        "age_days": 49,
+        "status": "active"
+      },
+      "languages": [
+        "Python"
+      ],
+      "file_counts": {
+        "Python": 571,
+        "TypeScript": 8,
+        "JavaScript": 7,
+        "Jupyter": 3
+      },
+      "python": {
+        "requires": ">=3.10",
+        "dependencies_sample": [
+          "pydantic-settings",
+          "python-Levenshtein",
+          "scikit-learn",
+          "filelock",
+          "loguru",
+          "fire",
+          "fuzzywuzzy",
+          "openai",
+          "litellm>=1.73  # to support `from litellm import get_valid_models`",
+          "azure.identity",
+          "pyarrow",
+          "rich",
+          "tqdm",
+          "typer",
+          "numpy # we use numpy as default data format. So we have to install numpy"
+        ]
+      },
+      "summary": "R&D-Agent currently leads as the top-performing machine learning engineering agent on MLE-bench: You can inspect the detailed runs of the above results online.",
+      "import_example": "from rdagent.app.qlib_rd_loop.factor import main",
+      "capabilities": {
+        "alpha_discovery": 2,
+        "machine_learning": 2,
+        "research_automation": 3,
+        "agent_memory_evaluation": 2,
+        "strategy_generation": 2
+      },
+      "overlaps": [
+        "qlib"
+      ],
+      "limitations": [
+        "needs LLM API keys + spend",
+        "runs generated code (needs sandboxing)",
+        "builds on qlib data",
+        "telemetry/network calls - audit before use"
+      ],
+      "static_risk_flags": [
+        "build/install script present: Makefile (not executed)",
+        "calls external LLM APIs",
+        "docker-oriented",
+        "needs API keys"
+      ],
+      "integration": {
+        "role": "LLM-driven autonomous R&D agent (factor/model evolution)",
+        "suitable_for": [
+          "research"
+        ],
+        "policy": "Phase-2 candidate for autonomous loop; run only in sandbox/container",
+        "adapter_status": "operational",
+        "env": "envs/agents"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": {
+          "install_ok": true,
+          "import_ok": true,
+          "version": "installed; no __version__ attr",
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "FinRL-Trading",
+      "group": "ai",
+      "requested_url": "https://github.com/AI4Finance-Foundation/FinRL-Trading",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/AI4Finance-Foundation/FinRL-Trading",
+        "branch": "master",
+        "head_sha": "4409abe925c904e570be78ebfb5e77ac3491dff8",
+        "size_mb": 133.5,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "file": "LICENSE",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-09-18T09:13:20+08:00",
+        "age_days": 54,
+        "status": "active"
+      },
+      "languages": [
+        "Python"
+      ],
+      "file_counts": {
+        "Python": 52,
+        "Jupyter": 4
+      },
+      "python": {
+        "requires": ">=3.11",
+        "dependencies_sample": [
+          "numpy>=1.24.0",
+          "pandas>=2.0.0",
+          "scikit-learn>=1.3.0",
+          "scipy>=1.11.0",
+          "lightgbm>=4.0.0",
+          "xgboost>=2.0.0",
+          "matplotlib>=3.7.0",
+          "plotly>=5.15.0",
+          "seaborn>=0.12.0",
+          "streamlit>=1.28.0",
+          "yfinance>=0.2.0",
+          "requests>=2.31.0",
+          "python-dotenv>=1.0.0",
+          "alpaca-py>=0.13.0",
+          "openai>=1.40.0"
+        ]
+      },
+      "summary": "Introduced in our paper *\"FinRL-X: An AI-Native Modular Infrastructure for Quantitative Trading\"* ([arXiv:2603.21330](https://arxiv.org/abs/2603.21330)), FinRL-X succeeds the original [FinRL](https://github.com/AI4Finance-Foundation/FinRL) framework with a fully modernized architecture designed for the LLM and agentic AI era. At its core is a **weight-centric architecture** \u2014 the target portfolio ",
+      "import_example": "(application repo; see README for scripts)",
+      "capabilities": {
+        "market_data_acquisition": 1,
+        "reinforcement_learning": 2,
+        "strategy_generation": 1,
+        "backtesting": 1,
+        "execution_simulation": 1
+      },
+      "overlaps": [
+        "FinRL"
+      ],
+      "limitations": [
+        "contains broker/live-trading connectors - DISABLED",
+        "application-style repo not a library",
+        "needs API keys"
+      ],
+      "static_risk_flags": [
+        "build/install script present: Dockerfile (not executed)",
+        "has broker/live-trading connectors",
+        "live trading features",
+        "needs API keys"
+      ],
+      "integration": {
+        "role": "RL trading pipelines/strategy framework (AI4Finance)",
+        "suitable_for": [
+          "research",
+          "learning"
+        ],
+        "policy": "Reference only; no credentials, no execution",
+        "adapter_status": "untested",
+        "env": "envs/rl"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": null
+      }
+    },
+    {
+      "id": "FinRL",
+      "group": "ai",
+      "requested_url": "https://github.com/AI4Finance-Foundation/FinRL",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/AI4Finance-Foundation/FinRL",
+        "branch": "master",
+        "head_sha": "7e98df461cbc7772f16a545a2f13b521e5d0b8f4",
+        "size_mb": 33.0,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "MIT",
+        "file": "LICENSE",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-10-25T21:49:47+08:00",
+        "age_days": 17,
+        "status": "active"
+      },
+      "languages": [
+        "Python"
+      ],
+      "file_counts": {
+        "Python": 103,
+        "Jupyter": 10
+      },
+      "python": {
+        "requires": "^3.7",
+        "dependencies_sample": [
+          "python",
+          "elegantrl",
+          "alpaca-trade-api",
+          "ccxt",
+          "jqdatasdk",
+          "pyfolio-reloaded",
+          "pyportfolioopt",
+          "ray",
+          "scikit-learn",
+          "sb3-contrib",
+          "stable-baselines3",
+          "stockstats",
+          "wrds",
+          "yfinance",
+          "alpaca-py"
+        ]
+      },
+      "summary": "This repository contains the original FinRL library for education, benchmarking, and research prototyping. For the next-generation AI-native and production-oriented trading stack, please visit **[FinRL-X / FinRL-Trading](https://github.com/AI4Finance-Foundation/FinRL-Trading)**.",
+      "import_example": "from finrl.meta.env_stock_trading.env_stocktrading import StockTradingEnv",
+      "capabilities": {
+        "market_data_acquisition": 1,
+        "machine_learning": 1,
+        "reinforcement_learning": 3,
+        "strategy_generation": 2,
+        "backtesting": 1
+      },
+      "overlaps": [
+        "FinRL-Trading"
+      ],
+      "limitations": [
+        "RL results notoriously non-robust OOS",
+        "old gym/stable-baselines pins",
+        "heavy torch stack"
+      ],
+      "static_risk_flags": [
+        "live trading features"
+      ],
+      "integration": {
+        "role": "Deep-RL trading environments and agents",
+        "suitable_for": [
+          "research",
+          "learning"
+        ],
+        "policy": "Research-only, isolated env",
+        "adapter_status": "untested",
+        "env": "envs/rl"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": {
+          "install_ok": true,
+          "import_ok": false,
+          "version": null,
+          "error": "\"/Users/newman/quantalpha/quant-autonomous-lab/envs/probe/FinRL/lib/python3.12/site-packages/finrl/meta/env_stock_trading/env_stocktrading.py\", line 5, in <module>\n    import gymnasium as gym\nModuleNotFoundError: No module named 'gymnasium'"
+        }
+      }
+    },
+    {
+      "id": "OpenBB",
+      "group": "ai",
+      "requested_url": "https://github.com/openbq-org/OpenBB",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/openbq-org/OpenBB",
+        "branch": "develop",
+        "head_sha": "11290d8b468570cea64b5feb0225ad9cbf5228e0",
+        "size_mb": 266.9,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "file": "LICENSE",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-11-11T05:09:39Z",
+        "age_days": 0,
+        "status": "active"
+      },
+      "languages": [
+        "Python",
+        "TypeScript"
+      ],
+      "file_counts": {
+        "Python": 2968,
+        "Rust": 19,
+        "Jupyter": 18,
+        "JavaScript": 11,
+        "TypeScript": 8
+      },
+      "python": {
+        "requires": null,
+        "dependencies_sample": []
+      },
+      "summary": "Open Data Platform by OpenBB (ODP) is the open-source toolset that helps data engineers integrate proprietary, licensed, and public data sources into downstream applications like AI copilots and research dashboards. ODP operates as the \"connect once, consume everywhere\" infrastructure layer that consolidates and exposes data to multiple surfaces at once: Python environments for quants, OpenBB Work",
+      "import_example": "from openbb import obb; obb.equity.price.historical('SPY')",
+      "capabilities": {
+        "market_data_acquisition": 3,
+        "historical_data_normalization": 3,
+        "options_analytics": 1,
+        "futures_research": 1,
+        "time_series_analytics": 1
+      },
+      "overlaps": [
+        "yfinance (used by engine)"
+      ],
+      "limitations": [
+        "many providers need paid API keys",
+        "very large dependency tree",
+        "extension auto-build/install steps - audit first"
+      ],
+      "static_risk_flags": [],
+      "integration": {
+        "role": "Open data platform / provider aggregation (SDK, API, CLI)",
+        "suitable_for": [
+          "research"
+        ],
+        "policy": "Optional provider source in envs/data; not core",
+        "adapter_status": "untested",
+        "env": "envs/data"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": {
+          "install_ok": true,
+          "import_ok": true,
+          "version": "ibit@2.0.0, ecb@2.0.0, eia@2.0.0, famafrench@2.0.0, federal_reserve@2.0.0, finra@2.0.0, fred@2.0.0, imf@3.0.0, jodi@2.0.0, nasdaq@2.0.0, news@2.0.0, oecd@2.0.0, openbb_charting@4.0.0, sec@2.0.0, tmx@2.0.0, us_eia@2.0.0, us_treasury@2.0.0, uscongress@2.0.0, usda@2.0.0, ustreasury@2.0.0\n\nBuilding...\n?",
+          "error": null
+        }
+      }
+    },
+    {
+      "id": "awesome-quant",
+      "group": "directories",
+      "requested_url": "https://github.com/wilsonfreitas/awesome-quant",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/wilsonfreitas/awesome-quant",
+        "branch": "main",
+        "head_sha": "b52a1a942eda36a6539b886f26a4a391883580d6",
+        "size_mb": 2.1,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "NONE",
+        "file": null,
+        "commercial_use": "NOT GRANTED: no license => all rights reserved; do not copy/redistribute"
+      },
+      "maintenance": {
+        "last_commit": "2026-10-19T11:39:33-03:00",
+        "age_days": 23,
+        "status": "active"
+      },
+      "languages": [
+        "Markdown"
+      ],
+      "file_counts": {
+        "Python": 22,
+        "Jupyter": 1,
+        "JavaScript": 1
+      },
+      "python": {
+        "requires": ">=3.11",
+        "dependencies_sample": [
+          "PyGithub>=2.2.0",
+          "pandas>=2.2.0",
+          "mypy>=1.14.0"
+        ]
+      },
+      "summary": "A curated list of insanely awesome libraries, packages and resources for Quants (Quantitative Finance).",
+      "import_example": "(n/a)",
+      "capabilities": {},
+      "overlaps": [
+        "awesome-systematic-trading",
+        "awesome-open-source-trading"
+      ],
+      "limitations": [
+        "NO LICENSE FILE: all rights reserved by default - keep as local read-only reference; do not redistribute"
+      ],
+      "static_risk_flags": [
+        "calls external LLM APIs",
+        "docker-oriented",
+        "has broker/live-trading connectors",
+        "live trading features",
+        "needs API keys"
+      ],
+      "integration": {
+        "role": "Curated link directory",
+        "suitable_for": [
+          "learning"
+        ],
+        "policy": "Reference; discovery only",
+        "adapter_status": "reference_only",
+        "env": "n/a"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": null
+      }
+    },
+    {
+      "id": "awesome-systematic-trading",
+      "group": "directories",
+      "requested_url": "https://github.com/paperswithbacktest/awesome-systematic-trading",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/paperswithbacktest/awesome-systematic-trading",
+        "branch": "main",
+        "head_sha": "ddfee8bb548bd6914191cb8fdb695d533ae16b0d",
+        "size_mb": 2.2,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "NONE",
+        "file": null,
+        "commercial_use": "NOT GRANTED: no license => all rights reserved; do not copy/redistribute"
+      },
+      "maintenance": {
+        "last_commit": "2026-09-28T12:33:48+02:00",
+        "age_days": 44,
+        "status": "active"
+      },
+      "languages": [
+        "Markdown"
+      ],
+      "file_counts": {
+        "Python": 63
+      },
+      "python": {
+        "requires": null,
+        "dependencies_sample": []
+      },
+      "summary": "We are collecting a list of resources papers, softwares, books, articles for finding, developing, and running systematic trading (quantitative trading) strategies. Start with a published strategy, its Python code and its data. Clone it into your",
+      "import_example": "(n/a)",
+      "capabilities": {},
+      "overlaps": [
+        "awesome-quant"
+      ],
+      "limitations": [
+        "NO LICENSE FILE: treat as read-only reference"
+      ],
+      "static_risk_flags": [
+        "has broker/live-trading connectors",
+        "live trading features"
+      ],
+      "integration": {
+        "role": "Curated systematic-trading resources directory",
+        "suitable_for": [
+          "learning"
+        ],
+        "policy": "Reference; discovery only",
+        "adapter_status": "reference_only",
+        "env": "n/a"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": null
+      }
+    },
+    {
+      "id": "awesome-open-source-trading",
+      "group": "directories",
+      "requested_url": "https://github.com/WallStreetPete/awesome-open-source-trading",
+      "acquisition": {
+        "status": "cloned",
+        "used_url": "https://github.com/WallStreetPete/awesome-open-source-trading",
+        "branch": "main",
+        "head_sha": "d0e685df79ccdc6fbed5e9d2180e8cb4ed29fe8b",
+        "size_mb": 1.6,
+        "shallow": true
+      },
+      "license": {
+        "spdx": "CC0-1.0",
+        "file": "LICENSE",
+        "commercial_use": "permitted with attribution/notice"
+      },
+      "maintenance": {
+        "last_commit": "2026-11-11T00:14:39-05:00",
+        "age_days": 0,
+        "status": "active"
+      },
+      "languages": [
+        "Markdown"
+      ],
+      "file_counts": {
+        "Python": 1
+      },
+      "python": {
+        "requires": null,
+        "dependencies_sample": []
+      },
+      "summary": "backtesting \u00b7 live execution \u00b7 Interactive Brokers \u00b7 Kalshi & Polymarket \u00b7 options & greeks \u00b7 AI agents \u00b7 fundamentals & data Every project has a short explainer, what it is good at, and its limitations. Every paper lists its strategy, the return **as reported by the authors**, whether costs and out-of-sample testing were included, and how to recreate it. Full explainers and recreation notes are i",
+      "import_example": "(n/a)",
+      "capabilities": {},
+      "overlaps": [
+        "awesome-quant"
+      ],
+      "limitations": [
+        "CC0 content; linked projects have their own licenses"
+      ],
+      "static_risk_flags": [
+        "docker-oriented",
+        "has broker/live-trading connectors",
+        "live trading features"
+      ],
+      "integration": {
+        "role": "Curated open-source trading directory",
+        "suitable_for": [
+          "learning"
+        ],
+        "policy": "Reference; discovery only",
+        "adapter_status": "reference_only",
+        "env": "n/a"
+      },
+      "verified": {
+        "api_source_path_exists": true,
+        "pypi_install_import_py312": null
+      }
+    }
+  ]
+}

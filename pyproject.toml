@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quant-autonomous-lab"
+version = "0.1.0"
+description = "Integration layer and research engine around a curated set of open-source quant repositories"
+requires-python = ">=3.11,<3.14"
+dependencies = ["numpy>=1.26", "pandas>=2.1", "scipy>=1.11", "pyarrow>=15", "matplotlib>=3.8"]
+
+[project.optional-dependencies]
+data = ["yfinance>=0.2.40"]
+portfolio = ["PyPortfolioOpt>=1.5"]
+serve = ["fastapi>=0.110", "uvicorn>=0.29", "httpx>=0.27"]
+report = ["quantstats>=0.0.62"]
+ml = ["scikit-learn>=1.4", "joblib>=1.3"]
+dev = ["pytest>=8"]
+# Install ONLY into the isolated env (uv venv --python 3.12 envs/derivs); core never imports these. nautilus_trader likewise lives only in envs/nautilus (no extra on purpose).
+derivs = ["py_vollib>=1.0.12", "QuantLib>=1.44", "pyarrow>=15"]
+
+[project.scripts]
+qal = "engine.cli:main"
+qae = "engine.qae_cli:main"
+
+[tool.setuptools.packages.find]
+include = ["engine*", "adapters*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = ["slow: runs worker venvs (qlib etc.)", "network: needs internet (deselect with -m 'not network')", "adapter: needs optional third-party libs"]

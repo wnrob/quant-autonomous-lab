@@ -1,0 +1,28 @@
+"""Canonical list of the 24 repositories (single source of truth)."""
+REPOS = [
+ # (id, group, url, [fallback urls])
+ ("qlib","core","https://github.com/microsoft/qlib",[]),
+ ("vectorbt","core","https://github.com/polakowo/vectorbt",[]),
+ ("quantstats","core","https://github.com/ranaroussi/quantstats",[]),
+ ("Lean","core","https://github.com/QuantConnect/Lean",[]),
+ ("machine-learning-for-trading","core","https://github.com/stefan-jansen/machine-learning-for-trading",[]),
+ ("PyPortfolioOpt","portfolio","https://github.com/PyPortfolio/PyPortfolioOpt",["https://github.com/robertmartin8/PyPortfolioOpt"]),
+ ("Riskfolio-Lib","portfolio","https://github.com/dcajasn/Riskfolio-Lib",[]),
+ ("skfolio","portfolio","https://github.com/skfolio/skfolio",[]),
+ ("QuantInvestStrats","portfolio","https://github.com/ArturSepp/QuantInvestStrats",[]),
+ ("alphalens-reloaded","portfolio","https://github.com/stefan-jansen/alphalens-reloaded",[]),
+ ("arbitragelab","portfolio","https://github.com/hudson-and-thames/arbitragelab",[]),
+ ("nautilus_trader","backtesting","https://github.com/nautechsystems/nautilus_trader",[]),
+ ("zipline-reloaded","backtesting","https://github.com/stefan-jansen/zipline-reloaded",[]),
+ ("backtrader","backtesting","https://github.com/mementum/backtrader",[]),
+ ("bt","backtesting","https://github.com/pmorissette/bt",[]),
+ ("QuantLib","backtesting","https://github.com/lballabio/QuantLib",[]),
+ ("py_vollib","backtesting","https://github.com/vollib/py_vollib",[]),
+ ("RD-Agent","ai","https://github.com/microsoft/RD-Agent",[]),
+ ("FinRL-Trading","ai","https://github.com/AI4Finance-Foundation/FinRL-Trading",[]),
+ ("FinRL","ai","https://github.com/AI4Finance-Foundation/FinRL",[]),
+ ("OpenBB","ai","https://github.com/openbq-org/OpenBB",["https://github.com/OpenBB-finance/OpenBB"]),
+ ("awesome-quant","directories","https://github.com/wilsonfreitas/awesome-quant",[]),
+ ("awesome-systematic-trading","directories","https://github.com/paperswithbacktest/awesome-systematic-trading",[]),
+ ("awesome-open-source-trading","directories","https://github.com/WallStreetPete/awesome-open-source-trading",[]),
+]

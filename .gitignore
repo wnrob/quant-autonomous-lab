@@ -1,0 +1,18 @@
+# environments and third-party clones (re-created by scripts/acquire.py and uv)
+envs/
+external/
+*.egg-info/
+__pycache__/
+.pytest_cache/
+# data caches, stores, run outputs (reproducible; may contain third-party market data)
+datasets/
+experiments/
+artifacts/
+!artifacts/cto/plan.md
+# local state
+*.db
+*.db-wal
+*.db-shm
+.sandbox.sb
+.DS_Store
+.github/

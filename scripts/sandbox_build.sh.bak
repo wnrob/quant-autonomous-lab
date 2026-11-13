@@ -1,0 +1,17 @@
+#!/bin/bash
+# Source-build installer under macOS sandbox-exec. Usage: sandbox_build.sh <env_dir> <pip spec...>
+# Boundary: scrubbed env (no tokens/keys), secret dirs unreadable, writes only inside env dir + uv cache + tmp. Network allowed (deps/sdists).
+# NOT a container: it limits blast radius for a build, it does not defeat a determined kernel-level attacker.
+set -euo pipefail
+ENVDIR="$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"; shift
+CACHE="$HOME/.cache/uv"; TMP="$ENVDIR.tmp"; mkdir -p "$TMP" "$CACHE"
+PROFILE="$ENVDIR.sb"
+cat > "$PROFILE" <<SB
+(version 1)
+(allow default)
+(deny file-read* (subpath "$HOME/.ssh") (subpath "$HOME/.aws") (subpath "$HOME/.claude") (subpath "$HOME/.config/gh") (subpath "$HOME/.gnupg")
+                 (subpath "$HOME/Library/Keychains") (subpath "$HOME/.netrc") (subpath "$HOME/.docker") (subpath "/Users/newman/quantalpha/data") (subpath "/Users/newman/quantalpha/tradesea"))
+(deny file-write* (require-not (require-any (subpath "$ENVDIR") (subpath "$TMP") (subpath "$CACHE") (subpath "/private/var/folders") (subpath "/dev"))))
+SB
+/usr/bin/sandbox-exec -f "$PROFILE" /usr/bin/env -i PATH="/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin" HOME="$HOME" TMPDIR="$TMP" UV_CACHE_DIR="$CACHE" \
+  /bin/bash -c "[ -x '$ENVDIR/bin/python' ] || uv venv --python 3.12 '$ENVDIR' -q && uv pip install --python '$ENVDIR/bin/python' --prerelease=allow ${PIP_FLAGS:-} $*"

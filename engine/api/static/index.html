@@ -1,0 +1,88 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>QAE Dashboard</title>
+<style>
+:root{--bg:#0f1318;--panel:#171d25;--ink:#e6e9ee;--mute:#8a94a3;--line:#252d38;--ok:#3ecf8e;--bad:#ef6b6b;--warn:#e8b84a;--acc:#6aa7ff}
+@media(prefers-color-scheme:light){:root{--bg:#f5f6f8;--panel:#fff;--ink:#1a2027;--mute:#66707e;--line:#dde1e7}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,sans-serif}
+nav{display:flex;gap:4px;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0}
+nav button{background:none;border:0;color:var(--mute);padding:6px 12px;border-radius:6px;cursor:pointer;font:inherit}nav button.on{background:var(--bg);color:var(--ink)}
+main{padding:16px;max-width:1200px;margin:auto}.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin-bottom:12px;overflow-x:auto}.card h3{margin:0 0 6px;font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.05em}
+.big{font-size:26px;font-weight:600}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mute);font-weight:500}
+.tag{padding:1px 8px;border-radius:10px;font-size:12px;border:1px solid var(--line)}.PASS,.CANDIDATE,.ok{color:var(--ok)}.FAIL,.REJECTED,.failed{color:var(--bad)}.warn{color:var(--warn)}
+button.a{background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:5px;padding:2px 8px;cursor:pointer;margin-right:4px}.mute{color:var(--mute)}
+.nodata{color:var(--mute);font-style:italic}
+</style></head><body>
+<nav id="nav"></nav><main id="main">loading…</main>
+<script>
+const views=["Command Center","Strategy Factory","Learning Center","Automation Control","Risk Center","Model Lab","Portfolio Intelligence","Research Lab"];let cur=0;
+const $=s=>document.querySelector(s),j=u=>fetch(u).then(r=>r.json()),f=(x,d=2)=>x==null||isNaN(x)?"–":(+x).toFixed(d),p=x=>x==null?"–":(x*100).toFixed(1)+"%";
+const cls=d=>/FAIL|REJECT/.test(d)?"FAIL":/PASS|CANDIDATE/.test(d)?"PASS":"";
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const noData=(d)=>`<div class="card"><h3>No data yet</h3><span class="nodata">${esc(d&&d.detail||"Nothing stored yet.")}</span></div>`;
+const protCard=pt=>pt?`<div class="card"><h3>Protected-test looks used</h3><div class="big">${esc(pt.looks_used)} / ${esc(pt.max_test_looks)}</div><span class="mute">remaining ${esc(pt.remaining)} · counted in the store (test_access)</span></div>`:"";
+function nav(){$("#nav").innerHTML=views.map((v,i)=>`<button class="${i==cur?'on':''}" onclick="cur=${esc(i)};render()">${esc(v)}</button>`).join("")}
+async function render(){nav();const m=$("#main");
+ if(cur==0){const [o,h]=await Promise.all([j("/api/overview"),j("/api/health")]);const u=o.budget.used_24h,l=o.budget.limits;
+  m.innerHTML=`<div class="grid"><div class="card"><h3>Experiments</h3><div class="big">${esc(o.experiments)}</div></div><div class="card"><h3>Protected-test looks used</h3><div class="big">${esc(o.test_looks_used)}</div></div>
+  <div class="card"><h3>Compute 24h</h3><div class="big">${f(u.compute_s,1)}s</div><span class="mute">limit ${esc(l.max_compute_s_per_day)}s</span></div><div class="card"><h3>Execution</h3><div class="big">paper only</div><span class="mute">live: ${esc(h.live_execution)}</span></div></div>
+  <div class="card"><h3>Strategies by status</h3>${o.strategies_by_status.map(s=>`<span class="tag">${esc(s.status)}: ${esc(s.n)}</span> `).join("")||"none yet"}</div>
+  <div class="card"><h3>Agents (honest status)</h3><table><tr><th>#</th><th>agent</th><th>state</th><th>scope</th></tr>${o.agents.map(a=>`<tr><td>${esc(a.id)}</td><td>${esc(a.name)}</td><td class="${a.implemented?'ok':'warn'}">${a.implemented?'implemented':'NOT implemented'}</td><td class="mute">${esc(a.scope)}</td></tr>`).join("")}</table></div>`}
+ if(cur==1){const [e,s]=await Promise.all([j("/api/experiments"),j("/api/strategies")]);
+  m.innerHTML=`<div class="card"><h3>Experiments (validation = selection window; test = protected, evaluated once)</h3><table><tr><th>#</th><th>strategy</th><th>decision</th><th>val Sharpe</th><th>B&H</th><th>DSR</th><th>val maxDD</th><th>test Sharpe</th><th>reasons</th><th>report</th></tr>
+  ${e.map(x=>{const v=x.metrics.validation,b=x.metrics.validation_benchmark,t=x.metrics.test;return `<tr><td>${esc(x.id)}</td><td>${esc(x.name)}</td><td class="${esc(cls(x.decision))}">${esc(x.decision)}</td><td>${f(v.sharpe)}</td><td>${f(b.sharpe)}</td><td>${f(v.dsr)}</td><td>${p(v.max_drawdown)}</td><td>${t?f(t.sharpe):'<span class=mute>not touched</span>'}</td><td class="mute">${x.reasons.map(esc).join("; ")}</td><td>${x.report_path?`<a href="/api/reports/${esc(x.id)}" target=_blank>QuantStats</a>`:""}</td></tr>`}).join("")}</table></div>
+  <div class="card"><h3>Strategy registry &amp; lineage</h3><table><tr><th>id</th><th>name</th><th>status</th><th>parent</th><th>history</th></tr>${s.map(x=>`<tr><td>${esc(x.id)}</td><td>${esc(x.name)}</td><td class="${esc(cls(x.status))}">${esc(x.status)}</td><td>${esc(x.parent_id??"")}</td><td class="mute">${esc(x.history.map(h=>h.new).join(" → "))}</td></tr>`).join("")}</table></div>`}
+ if(cur==2){const [l,h]=await Promise.all([j("/api/lessons"),j("/api/hypotheses")]);
+  m.innerHTML=`<div class="card"><h3>Lessons (incl. negative results)</h3><table>${l.map(x=>`<tr><td>#${esc(x.experiment_id)}</td><td><span class="tag">${esc(x.kind)}</span></td><td>${esc(x.text)}</td></tr>`).join("")}</table></div>
+  <div class="card"><h3>Hypotheses</h3><table>${h.map(x=>`<tr><td>${esc(x.id)}</td><td class="mute">${esc(x.source)}</td><td>${esc(x.text)}<br><span class="mute">${esc(x.rationale)}</span></td></tr>`).join("")}</table></div>
+  <div class="card"><h3>Search memory</h3><input id="q" placeholder="e.g. drawdown" style="width:60%"> <button class="a" onclick="sr()">search</button><div id="sr"></div></div>`}
+ if(cur==3){const d=await j("/api/jobs");
+  m.innerHTML=`<div class="card"><h3>Jobs</h3><table><tr><th>job</th><th>state</th><th>interval</th><th>last</th><th>next</th><th></th></tr>${d.jobs.map(x=>`<tr><td>${esc(x.name)}</td><td>${esc(x.state)}</td><td>${esc(x.interval_s)}s</td><td class="${x.last_status=='ok'?'ok':x.last_status?'failed':''}">${esc(x.last_status??"never")}</td><td>${esc(new Date(x.next_run*1000).toLocaleString())}</td><td>${["pause","resume","cancel","retry"].map(a=>`<button class="a" data-job="${esc(x.name)}" data-act="${esc(a)}" onclick="act(this.dataset.job,this.dataset.act)">${esc(a)}</button>`).join("")}</td></tr>`).join("")}</table></div>
+  <div class="card"><h3>Recent runs</h3><table>${d.runs.map(r=>`<tr><td>${esc(r.name)}</td><td>${esc(r.status)}</td><td class="mute">${esc((r.detail||"").slice(0,160))}</td></tr>`).join("")}</table></div>`}
+ if(cur==4)return riskView(m);
+ if(cur==5)return modelView(m);
+ if(cur==6)return portfolioView(m);
+ if(cur==7)return researchView(m);
+}
+// ---- Risk Center (GET /api/risk): stored risk-gate reasons + drawdown/CVaR; looks vs Criteria limit
+async function riskView(m){const d=await j("/api/risk");
+ const lim=d.risk_limits?`<div class="card"><h3>Risk limits (code constants)</h3><span class="mute">max drawdown ${p(d.risk_limits.max_drawdown)} · max leverage ${f(d.risk_limits.max_leverage,2)} · max turnover ${f(d.risk_limits.max_annual_turnover,1)}x/yr</span></div>`:"";
+ if(d.status!=="ok"){m.innerHTML=`<div class="grid">${protCard(d.protected_test)}</div>${lim}${noData(d)}`;return}
+ const nv=d.experiments.filter(x=>x.risk_violations.length).length;
+ m.innerHTML=`<div class="grid">${protCard(d.protected_test)}<div class="card"><h3>Experiments with risk-gate violations</h3><div class="big">${esc(nv)} / ${esc(d.experiments.length)}</div></div></div>${lim}
+ <div class="card"><h3>Per experiment (stored validation/test metrics; violations as recorded in reasons)</h3><table><tr><th>#</th><th>strategy</th><th>decision</th><th>val maxDD</th><th>val CVaR95</th><th>test maxDD</th><th>test CVaR95</th><th>turnover/yr</th><th>risk-gate violations</th></tr>
+ ${d.experiments.map(x=>`<tr><td>${esc(x.id)}</td><td>${esc(x.name)}<br><span class="mute">${esc(x.family)}</span></td><td class="${esc(cls(x.decision))}">${esc(x.decision)}</td><td>${p(x.validation.max_drawdown)}</td><td>${p(x.validation.cvar_95)}</td><td>${x.test?p(x.test.max_drawdown):'<span class=mute>not touched</span>'}</td><td>${x.test?p(x.test.cvar_95):'<span class=mute>not touched</span>'}</td><td>${f(x.turnover_annual,1)}</td><td class="warn">${x.risk_violations.map(esc).join("<br>")||'<span class=mute>none recorded</span>'}</td></tr>`).join("")}</table></div>`}
+// ---- Model Lab (GET /api/models): ml_models rows + latest artifacts/ml run
+async function modelView(m){const d=await j("/api/models");
+ const reg=d.registry.status==="ok"?`<div class="card"><h3>Model registry (ml_models)</h3><table><tr><th>id</th><th>name</th><th>family</th><th>seed</th><th>status</th><th>artifact</th></tr>${d.registry.rows.map(r=>`<tr><td>${esc(r.id)}</td><td>${esc(r.name)}</td><td>${esc(r.family)}</td><td>${esc(r.seed)}</td><td class="${esc(cls(r.status))}">${esc(r.status)}</td><td class="mute">${esc(r.artifact_file||"")}</td></tr>`).join("")}</table></div>`:noData(d.registry);
+ let run;
+ if(d.ml_run.status!=="ok") run=noData(d.ml_run);
+ else{const r=d.ml_run,ss=r.seed_stability||{};
+  run=`<div class="grid"><div class="card"><h3>Run</h3><span class="big" style="font-size:18px">${esc(r.run)}</span><br><span class="mute">generated ${esc(r.generated)}</span></div>
+  <div class="card"><h3>Verdict (as stored)</h3><span class="${/NULL|FAIL/.test(r.verdict||"")?'warn':'ok'}">${esc(r.verdict)}</span><br><span class="mute">protected test consulted: ${r.protected_test_consulted?'yes':'no'} · trials ${esc(r.n_trials)} · validation passes ${esc((r.validation_passes||[]).length)}</span></div></div>
+  <div class="card"><h3>Runs (validation window; decision metric = active return vs equal-weight)</h3><table><tr><th>run</th><th>decision</th><th>DSR</th><th>active %/yr</th><th>active Sharpe</th><th>tracking err</th><th>val maxDD</th><th>turnover/yr</th><th>reasons</th></tr>
+  ${r.runs.map(x=>`<tr><td>${esc(x.name)}</td><td class="${esc(cls(x.decision))}">${esc(x.decision)}</td><td>${f(x.dsr)}</td><td>${p(x.val_active_ann)}</td><td>${f(x.val_active_sharpe)}</td><td>${p(x.tracking_error)}</td><td>${p(x.max_drawdown)}</td><td>${f(x.turnover_annual,1)}x</td><td class="mute">${(x.reasons||[]).map(esc).join("; ")}</td></tr>`).join("")}</table></div>
+  <div class="card"><h3>Seed stability (stored)</h3>${Object.keys(ss).map(k=>`<span class="tag">${esc(k)}: std ${f(ss[k].std,3)} · ${esc(ss[k].n_seeds)} seed(s)</span> `).join("")||'<span class=mute>not stored</span>'}</div>`}
+ m.innerHTML=reg+run}
+// ---- Portfolio Intelligence (GET /api/portfolio): stored allocator comparison
+async function portfolioView(m){const d=await j("/api/portfolio");
+ if(d.status!=="ok"){m.innerHTML=noData(d);return}
+ const v=d.verdict_vs_equal_weight||{},t=d.table||{};
+ m.innerHTML=`<div class="grid"><div class="card"><h3>Run</h3><span class="big" style="font-size:18px">${esc(d.run)}</span><br><span class="mute">${esc(d.label||"")}</span></div>
+ <div class="card"><h3>Selected (as stored)</h3><span class="big" style="font-size:18px">${esc(d.selected)}</span><br><span class="mute">${esc(d.summary||"")}</span></div>
+ <div class="card"><h3>Costs / trials</h3>${esc(d.cost_bps)} bps · ${esc(d.n_trials)} methods counted as trials</div></div>
+ <div class="card"><h3>Allocator comparison (stored table; active vs equal-weight from verdict)</h3><table><tr><th>method</th><th>net return</th><th>Sharpe</th><th>Sortino</th><th>maxDD</th><th>CVaR95</th><th>div. ratio</th><th>eff. bets</th><th>turnover/yr</th><th>active %/yr</th><th>active DSR</th><th>better than EW</th></tr>
+ ${Object.keys(t).map(k=>{const r=t[k],vv=v[k];return `<tr><td>${esc(k)}</td><td>${p(r.net_return_total)}</td><td>${f(r.sharpe)}</td><td>${f(r.sortino)}</td><td>${p(r.max_drawdown)}</td><td>${p(r.cvar_95)}</td><td>${f(r.diversification_ratio)}</td><td>${f(r.effective_bets)}</td><td>${f(r.turnover_oneway_annual)}x</td><td>${vv?p(vv.active_ann_return):'<span class=mute>baseline</span>'}</td><td>${vv?f(vv.active_dsr):'–'}</td><td class="${vv?(vv.better_than_equal_weight?'ok':'warn'):'mute'}">${vv?(vv.better_than_equal_weight?'yes':'no'):'baseline'}</td></tr>`}).join("")}</table></div>
+ <div class="card"><h3>Reasons per challenger (as stored)</h3>${Object.keys(v).map(k=>`<div><b>${esc(k)}</b>: <span class="mute">${(v[k].reasons||[]).map(esc).join("; ")||"none"}</span></div>`).join("")}</div>`}
+// ---- Research Lab (GET /api/research): experiments by family/decision, lessons (incl. negative), hypotheses
+async function researchView(m){const d=await j("/api/research");
+ if(d.status!=="ok"){m.innerHTML=`<div class="grid">${protCard(d.protected_test)}</div>${noData(d)}`;return}
+ const fam={};d.by_family.forEach(r=>{(fam[r.family]=fam[r.family]||[]).push(r.decision+": "+r.n)});
+ m.innerHTML=`<div class="grid"><div class="card"><h3>Experiments</h3><div class="big">${esc(d.experiments_total)}</div></div>${protCard(d.protected_test)}
+ <div class="card"><h3>Strategies by status</h3>${d.strategies_by_status.map(s=>`<span class="tag">${esc(s.status)}: ${esc(s.n)}</span> `).join("")}</div></div>
+ <div class="card"><h3>Decisions by family</h3><table><tr><th>family</th><th>decision counts</th></tr>${Object.keys(fam).map(k=>`<tr><td>${esc(k)}</td><td>${fam[k].map(esc).join(" · ")}</td></tr>`).join("")}</table></div>
+ <div class="card"><h3>Lessons (incl. negative results)</h3><div class="mute">${d.lesson_kinds.map(k=>`${esc(k.kind)}: ${esc(k.n)}`).join(" · ")||"none"}</div><table>${d.lessons.map(x=>`<tr><td>#${esc(x.experiment_id??"")}</td><td><span class="tag ${x.kind==='negative'?'warn':'ok'}">${esc(x.kind)}</span></td><td>${esc(x.text)}</td></tr>`).join("")||'<tr><td class="nodata">No lessons yet</td></tr>'}</table></div>
+ <div class="card"><h3>Hypotheses</h3><div class="mute">${d.hypothesis_sources.map(k=>`${esc(k.source)}: ${esc(k.n)}`).join(" · ")||"none"}</div><table>${d.hypotheses.map(x=>`<tr><td>${esc(x.id)}</td><td class="mute">${esc(x.source)}</td><td>${esc(x.text)}<br><span class="mute">${esc(x.rationale)}</span></td></tr>`).join("")||'<tr><td class="nodata">No hypotheses yet</td></tr>'}</table></div>`}
+async function act(n,a){await fetch(`/api/jobs/${encodeURIComponent(n)}/${encodeURIComponent(a)}`,{method:"POST"});render()}
+async function sr(){const r=await j("/api/search?q="+encodeURIComponent($("#q").value));$("#sr").innerHTML=r.map(x=>`<p><span class="tag">${esc(x.kind)} #${esc(x.ref)}</span> ${esc(x.snippet)}</p>`).join("")||"no match"}
+render();
+</script></body></html>

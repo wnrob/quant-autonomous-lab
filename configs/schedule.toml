@@ -1,0 +1,23 @@
+# Intervals in seconds; edit freely. Handlers are in engine/orchestration/jobs.py
+[jobs.data_refresh]
+interval_s = 21600        # 6h
+
+[jobs.daily_review]
+interval_s = 86400
+
+[jobs.nightly_experiments]
+interval_s = 86400
+
+[jobs.weekly_report]
+interval_s = 604800
+
+[jobs.alpha_search]
+interval_s = 86400
+
+# Forward SHADOW evaluation (engine/forward). Run data_refresh AFTER the 16:00 New York close and BEFORE forward_log,
+# otherwise the as_of bar is partial and the signal is ineligible as evidence. Only CANDIDATE strategies are logged; no orders.
+[jobs.forward_log]
+interval_s = 86400
+
+[jobs.forward_score]
+interval_s = 86400

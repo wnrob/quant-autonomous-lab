@@ -1,0 +1,396 @@
+{
+  "version": 1,
+  "universes": {
+    "etf24": {
+      "members": {
+        "SPY": {
+          "official_inception": {
+            "date": "1993-01-22",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "QQQ": {
+          "official_inception": {
+            "date": "1999-03-10",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "IWM": {
+          "official_inception": {
+            "date": "2000-05-22",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "EFA": {
+          "official_inception": {
+            "date": "2001-08-14",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "EEM": {
+          "official_inception": {
+            "date": "2003-04-07",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "VNQ": {
+          "official_inception": {
+            "date": "2004-09-23",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "TLT": {
+          "official_inception": {
+            "date": "2002-07-22",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "IEF": {
+          "official_inception": {
+            "date": "2002-07-22",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "LQD": {
+          "official_inception": {
+            "date": "2002-07-22",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "HYG": {
+          "official_inception": {
+            "date": "2007-04-04",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2007-04-11",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": false
+          },
+          "availability_date": "2007-04-11",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "GLD": {
+          "official_inception": {
+            "date": "2004-11-18",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "SLV": {
+          "official_inception": {
+            "date": "2006-04-21",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2006-04-28",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": false
+          },
+          "availability_date": "2006-04-28",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "DBC": {
+          "official_inception": {
+            "date": "2006-02-03",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2006-02-06",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": false
+          },
+          "availability_date": "2006-02-06",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "USO": {
+          "official_inception": {
+            "date": "2006-04-10",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2006-04-10",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": false
+          },
+          "availability_date": "2006-04-10",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "XLE": {
+          "official_inception": {
+            "date": "1998-12-16",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "XLF": {
+          "official_inception": {
+            "date": "1998-12-16",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "XLK": {
+          "official_inception": {
+            "date": "1998-12-16",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "XLV": {
+          "official_inception": {
+            "date": "1998-12-16",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "XLY": {
+          "official_inception": {
+            "date": "1998-12-16",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "XLP": {
+          "official_inception": {
+            "date": "1998-12-16",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "XLU": {
+          "official_inception": {
+            "date": "1998-12-16",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "XLI": {
+          "official_inception": {
+            "date": "1998-12-16",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "XLB": {
+          "official_inception": {
+            "date": "1998-12-16",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        },
+        "AGG": {
+          "official_inception": {
+            "date": "2003-09-22",
+            "source": "agent knowledge, verify",
+            "confidence": "medium"
+          },
+          "first_valid_bar": {
+            "date": "2005-01-03",
+            "source": "cached yahoo_finance(yfinance) frame, sha256 476483a64551, request start 2005-01-01",
+            "confidence": "high",
+            "left_censored": true
+          },
+          "availability_date": "2005-01-03",
+          "availability_rule": "max(official_inception, first_valid_bar) - later date wins (conservative)",
+          "delisting": null
+        }
+      },
+      "survivorship_free": false
+    }
+  },
+  "data_sha256": "476483a64551c1e7e60b5f57b700951869d7b31c1a95bb9d1d4191eca349c1bd",
+  "note": "delisting=null means 'still listed as of the cache date', not 'verified never delisted'."
+}
